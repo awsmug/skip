@@ -43,25 +43,13 @@ abstract class Plugin {
 		}
 
 		add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
-		add_action( 'plugins_loaded', array( $this, 'plugins_loaded' ) );
-		add_action( 'wp_loaded', array( $this, 'wp_loaded' ) );
-		add_action( 'wp', array( $this, 'wp' ) );
+		add_action( 'plugins_loaded', array( $this, 'run' ) );
 	}
 
 	/**
 	 *  Put in your functionality which have to be loaded after all plugins loaded
 	 */
-	public function plugins_loaded(){}
-
-	/**
-	 *  Put in your functionality which have to be loaded after WP is fully loaded
-	 */
-	public function wp_loaded(){}
-
-	/**
-	 *  Put in your functionality which have to be loaded after WP object is set up
-	 */
-	public function wp(){}
+	public function run(){}
 
 	public static function activate(){}
 
