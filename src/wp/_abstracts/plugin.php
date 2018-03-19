@@ -32,15 +32,7 @@ abstract class Plugin {
 	 * Initializing Plugin
 	 */
 	protected final function init() {
-		self::plugin_hooks();
-
-		if( property_exists( $this, 'post_types' ) ) {
-			$this->post_types();
-		}
-
-		if( property_exists( $this, 'shortcodes' ) ) {
-			$this->shortcodes();
-		}
+		self::setup_hooks();
 
 		add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
 		add_action( 'plugins_loaded', array( $this, 'run' ) );
@@ -49,7 +41,7 @@ abstract class Plugin {
 	/**
 	 *  Put in your functionality which have to be loaded after all plugins loaded
 	 */
-	public function run(){}
+	abstract public function run();
 
 	public static function activate(){}
 
@@ -57,7 +49,7 @@ abstract class Plugin {
 
 	public static function uninstall(){}
 
-	private static final function plugin_hooks() {
+	private static final function setup_hooks() {
 		$plugin_file = self::get_path() . '/' . self::get_plugin_file();
 
 		register_activation_hook( $plugin_file, array( get_called_class(), 'activate' ) );
