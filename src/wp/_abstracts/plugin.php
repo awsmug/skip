@@ -61,7 +61,7 @@ abstract class Plugin {
 	/**
 	 *  Put in your functionality which have to be loaded after WP object is set up
 	 */
-	public static function wp(){}
+	public function wp(){}
 
 	public static function activate(){}
 
