@@ -32,6 +32,8 @@ abstract class Plugin {
 	 * Initializing Plugin
 	 */
 	protected final function init() {
+		self::plugin_hooks();
+
 		if( property_exists( $this, 'post_types' ) ) {
 			$this->post_types();
 		}
@@ -49,17 +51,31 @@ abstract class Plugin {
 	/**
 	 *  Put in your functionality which have to be loaded after all plugins loaded
 	 */
-	abstract public function plugins_loaded();
+	public function plugins_loaded(){}
 
 	/**
 	 *  Put in your functionality which have to be loaded after WP is fully loaded
 	 */
-	abstract public function wp_loaded();
+	public function wp_loaded(){}
 
 	/**
 	 *  Put in your functionality which have to be loaded after WP object is set up
 	 */
 	abstract public function wp();
+
+	public static function activate(){}
+
+	public static function deactivate(){}
+
+	public static function uninstall(){}
+
+	private static final function plugin_hooks() {
+		$plugin_file = self::get_path() . '/' . self::get_plugin_file();
+
+		register_activation_hook( $plugin_file, array( get_called_class(), 'activate' ) );
+		register_deactivation_hook( $plugin_file, array( get_called_class(), 'deactivate' ) );
+		register_uninstall_hook( $plugin_file, array( get_called_class(), 'uninstall' ) );
+	}
 
 	/**
 	 * Loading textdomain
@@ -79,9 +95,9 @@ abstract class Plugin {
 	 *
 	 * @return string
 	 */
-	public final function get_url( $path = '' ) {
-		$rc = new \ReflectionClass( $this );
-		return plugin_dir_url( $rc->getFileName() ) . ltrim( $path, '/' );
+	public final static function get_url( $path = '' ) {
+		$rc = new \ReflectionClass( get_called_class() );
+		return plugin_dir_url( $rc->getFileName() );
 	}
 
 	/**
@@ -91,9 +107,14 @@ abstract class Plugin {
 	 *
 	 * @return string
 	 */
-	public final function get_path( $path = '' ) {
-		$rc = new \ReflectionClass( $this );
-		return plugin_dir_path(  $rc->getFileName() ) . ltrim( $path, '/' );
+	public final static function get_path() {
+		$rc = new \ReflectionClass( get_called_class() );
+		return plugin_dir_path( $rc->getFileName() );
+	}
+
+	public final static function get_plugin_file() {
+		$rc = new \ReflectionClass( get_called_class() );
+		return basename( $rc->getFileName() );
 	}
 
 	/**
@@ -144,3 +165,4 @@ abstract class Plugin {
 		return $this->get_url( $urlpath );
 	}
 }
+
