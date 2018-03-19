@@ -1,0 +1,22 @@
+{
+  "name": "awsmug/skip",
+  "description": "WordPress faster programming Framework",
+  "version": "1.0.0",
+  "license": "GPL-3.0",
+  "type": "wordpress-framework",
+  "authors": [
+    {
+      "name": "Sven Wagener",
+      "email": "contact@awesome.ug",
+      "homepage": "http://www.awesome.ug",
+      "role": "Product Lead"
+    }
+  ],
+  "config": {
+    "preferred-install": "dist"
+  },
+  "require": {
+  },
+  "require-dev": {
+  }
+}
