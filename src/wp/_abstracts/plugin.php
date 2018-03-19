@@ -19,7 +19,7 @@ abstract class Plugin {
 	 *
 	 * @var string|null
 	 */
-	public $textdomain = null;
+	protected $textdomain = null;
 
 	/**
 	 * Assets sub directory
@@ -50,7 +50,7 @@ abstract class Plugin {
 	public static function uninstall(){}
 
 	private static final function setup_hooks() {
-		$plugin_file = self::get_path() . '/' . self::get_plugin_file();
+		$plugin_file = self::get_plugin_file();
 
 		register_activation_hook( $plugin_file, array( get_called_class(), 'activate' ) );
 		register_deactivation_hook( $plugin_file, array( get_called_class(), 'deactivate' ) );
@@ -62,7 +62,13 @@ abstract class Plugin {
 	 */
 	public final function load_textdomain() {
 		if( empty( $this->textdomain ) ) {
-			return;
+			$plugin_data = get_plugin_data( self::get_plugin_file() );
+
+			if( empty( $plugin_data['TextDomain'] ) ) {
+				return;
+			}
+
+			$this->textdomain = $plugin_data['TextDomain'] ;
 		}
 
 		load_plugin_textdomain( $this->textdomain );
@@ -94,7 +100,7 @@ abstract class Plugin {
 
 	public final static function get_plugin_file() {
 		$rc = new \ReflectionClass( get_called_class() );
-		return basename( $rc->getFileName() );
+		return $rc->getFileName();
 	}
 
 	/**
@@ -118,6 +124,7 @@ abstract class Plugin {
 			case 'js':
 				$urlpath .= 'dist/js/' . $name . '.js';
 				break;
+			case 'jpg':
 			case 'png':
 			case 'gif':
 			case 'svg':
