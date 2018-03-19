@@ -44,17 +44,17 @@ abstract class Plugin {
 	/**
 	 *  Put in your functionality which have to be loaded after all plugins loaded
 	 */
-	public function plugins_loaded(){}
+	abstract public function plugins_loaded();
 
 	/**
 	 *  Put in your functionality which have to be loaded after WP is fully loaded
 	 */
-	public function wp_loaded(){}
+	abstract public function wp_loaded();
 
 	/**
 	 *  Put in your functionality which have to be loaded after WP object is set up
 	 */
-	public function wp(){}
+	abstract public function wp();
 
 	/**
 	 * Loading textdomain
@@ -70,12 +70,12 @@ abstract class Plugin {
 	/**
 	 *  Put in your post type functionality here
 	 */
-	protected function post_types(){}
+	abstract protected function post_types();
 
 	/**
 	 * Put in your shortcode functionality here
 	 */
-	protected function shortcodes(){}
+	abstract protected function shortcodes();
 
 	/**
 	 * Get Plugin URL
