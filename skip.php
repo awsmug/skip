@@ -1,6 +1,5 @@
 <?php
 
-use Skip\Autoloader;
 use Skip\API\API;
 
 require_once ( dirname( __FILE__ ) . '/src/autoloader.php' );
