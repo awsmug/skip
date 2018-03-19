@@ -29,9 +29,9 @@ abstract class Plugin {
 	protected $asssets_path = 'assets/';
 
 	/**
-	 * Init
+	 * Initializing Plugin
 	 */
-	protected function init() {
+	protected final function init() {
 		$this->post_types();
 		$this->shortcodes();
 
@@ -59,7 +59,7 @@ abstract class Plugin {
 	/**
 	 * Loading textdomain
 	 */
-	public function load_textdomain() {
+	public final function load_textdomain() {
 		if( empty( $this->textdomain ) ) {
 			return;
 		}
@@ -84,7 +84,7 @@ abstract class Plugin {
 	 *
 	 * @return string
 	 */
-	public function get_url( $path = '' ) {
+	public final function get_url( $path = '' ) {
 		$rc = new \ReflectionClass( $this );
 		return plugin_dir_url( $rc->getFileName() ) . ltrim( $path, '/' );
 	}
@@ -96,7 +96,7 @@ abstract class Plugin {
 	 *
 	 * @return string
 	 */
-	public function get_path( $path = '' ) {
+	public final function get_path( $path = '' ) {
 		$rc = new \ReflectionClass( $this );
 		return plugin_dir_path(  $rc->getFileName() ) . ltrim( $path, '/' );
 	}
@@ -110,7 +110,7 @@ abstract class Plugin {
 	 *
 	 * @return string
 	 */
-	public function get_asset_url( $name, $mode = '', $force = false ) {
+	public final function get_asset_url( $name, $mode = '', $force = false ) {
 		$urlpath = $this->asssets_path;
 
 		$can_min = true;
