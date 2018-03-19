@@ -32,8 +32,13 @@ abstract class Plugin {
 	 * Initializing Plugin
 	 */
 	protected final function init() {
-		$this->post_types();
-		$this->shortcodes();
+		if( property_exists( $this, 'post_types' ) ) {
+			$this->post_types();
+		}
+
+		if( property_exists( $this, 'shortcodes' ) ) {
+			$this->shortcodes();
+		}
 
 		add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
 		add_action( 'plugins_loaded', array( $this, 'plugins_loaded' ) );
@@ -66,16 +71,6 @@ abstract class Plugin {
 
 		load_plugin_textdomain( $this->textdomain );
 	}
-
-	/**
-	 *  Put in your post type functionality here
-	 */
-	abstract protected function post_types();
-
-	/**
-	 * Put in your shortcode functionality here
-	 */
-	abstract protected function shortcodes();
 
 	/**
 	 * Get Plugin URL
