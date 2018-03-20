@@ -15,8 +15,7 @@
   "config": {
     "preferred-install": "dist"
   },
-  "require": {
-  },
-  "require-dev": {
+  "autoload": {
+    "psr-4": {"Skip\\": "src/"}
   }
 }
