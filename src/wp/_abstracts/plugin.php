@@ -10,14 +10,19 @@ use Skip\Singleton;
  * Create a class from this abstract class and put it into the main plugin file. It contains basic functionalities for plugin creation.
  *
  * @package Skip
+ *
+ * @since 1.0.0
  */
 abstract class Plugin {
 	use Singleton;
+	use Enqueue_Scripts;
 
 	/**
 	 * Textdomain
 	 *
 	 * @var string|null
+	 *
+	 * @since 1.0.0
 	 */
 	protected $textdomain = null;
 
@@ -25,23 +30,33 @@ abstract class Plugin {
 	 * Assets sub directory
 	 *
 	 * @var string
+	 *
+	 * @since 1.0.0
 	 */
 	protected $asssets_path = 'assets/';
 
 	/**
 	 * Initializing Plugin
+	 *
+	 * @since 1.0.0
 	 */
 	protected final function init() {
-		self::setup_hooks();
+		$this->activation_hooks();
+
+		$this->init_enqueue_scripts();
 
 		add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
 		add_action( 'plugins_loaded', array( $this, 'run' ) );
 	}
 
 	/**
-	 *  Put in your functionality which have to be loaded after all plugins loaded
+	 * Running Plugin after all Plugins loaded
+	 *
+	 * @since 1.0.0
 	 */
 	abstract public function run();
+
+	protected function setup(){}
 
 	public static function activate(){}
 
@@ -49,7 +64,8 @@ abstract class Plugin {
 
 	public static function uninstall(){}
 
-	private static final function setup_hooks() {
+
+	private final function activation_hooks() {
 		$plugin_file = self::get_plugin_file();
 
 		register_activation_hook( $plugin_file, array( get_called_class(), 'activate' ) );
@@ -60,7 +76,7 @@ abstract class Plugin {
 	/**
 	 * Loading textdomain
 	 */
-	public final function load_textdomain() {
+	private final function load_textdomain() {
 		if( empty( $this->textdomain ) ) {
 			$plugin_data = get_plugin_data( self::get_plugin_file() );
 
@@ -150,6 +166,22 @@ abstract class Plugin {
 		}
 
 		return $this->get_url( $urlpath );
+	}
+
+	/**
+	 * Hiding functions from IDE autocomplete
+	 *
+	 * @param string $method
+	 * @param array $arguments
+	 *
+	 * @since 1.0.0
+	 */
+	public function __call( $method, $arguments ) {
+		switch( $method ) {
+			case 'loadtextdomain':
+				$this->load_textdomain();
+				break;
+		}
 	}
 }
 

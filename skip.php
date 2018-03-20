@@ -2,7 +2,7 @@
 
 use Skip\API\API;
 
-require_once ( dirname( __FILE__ ) . '/src/autoloader.php' );
+require_once ( dirname( __FILE__ ) . '/vendor/autoload.php' );
 
 /**
  * The mighty and magic Superfunction!
@@ -12,5 +12,3 @@ require_once ( dirname( __FILE__ ) . '/src/autoloader.php' );
 function skip() {
 	return API::get_instance();
 }
-
-\Skip\Skip_Autoloader::get_instance();
