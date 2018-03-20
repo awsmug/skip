@@ -24,7 +24,7 @@ abstract class Plugin {
 	 *
 	 * @since 1.0.0
 	 */
-	protected $textdomain = null;
+	private $textdomain = null;
 
 	/**
 	 * Assets sub directory
@@ -33,7 +33,7 @@ abstract class Plugin {
 	 *
 	 * @since 1.0.0
 	 */
-	protected $asssets_path = 'assets/';
+	private $asssets_path = 'assets/';
 
 	/**
 	 * Initializing Plugin
@@ -56,15 +56,50 @@ abstract class Plugin {
 	 */
 	abstract public function run();
 
-	protected function setup(){}
+	/**
+	 * Setting textdomain
+	 *
+	 * @param string $textdomain
+	 */
+	protected function set_textdomain( $textdomain ) {
+		$this->textdomain = $textdomain;
+	}
 
-	public static function activate(){}
+	/**
+	 * Setting asset path
+	 *
+	 * @param string $asset_path
+	 */
+	protected function set_asset_path( $asset_path ) {
+		$this->asssets_path = $asset_path;
+	}
 
-	public static function deactivate(){}
+	/**
+	 * On Plugin activation
+	 *
+	 * @since 1.0.0
+	 */
+	private static function activate(){}
 
-	public static function uninstall(){}
+	/**
+	 * On Plugin deactivation
+	 *
+	 * @since 1.0.0
+	 */
+	private static function deactivate(){}
 
+	/**
+	 * On Plugin uninstalling
+	 *
+	 * @since 1.0.0
+	 */
+	private static function uninstall(){}
 
+	/**
+	 * Refistering all activation hooks
+	 *
+	 * @since 1.0.0
+	 */
 	private final function activation_hooks() {
 		$plugin_file = self::get_plugin_file();
 
@@ -75,6 +110,8 @@ abstract class Plugin {
 
 	/**
 	 * Loading textdomain
+	 *
+	 * @since 1.0.0
 	 */
 	private final function load_textdomain() {
 		if( empty( $this->textdomain ) ) {
@@ -181,6 +218,30 @@ abstract class Plugin {
 			case 'loadtextdomain':
 				$this->load_textdomain();
 				break;
+		}
+	}
+
+	/**
+	 * Hiding functions from IDE autocomplete
+	 *
+	 * @param string $method
+	 * @param array $arguments
+	 *
+	 * @since 1.0.0
+	 */
+	public static function __callStatic( $method, $arguments ) {
+		switch( $method ) {
+			case 'activate':
+				self::activate();
+				break;
+			case 'deactivate':
+				self::deactivate();
+				break;
+
+			case 'uninstall':
+				self::uninstall();
+				break;
+
 		}
 	}
 }
