@@ -31,7 +31,7 @@ trait Enqueue_Scripts {
 	 *
 	 * @since 1.0.0
 	 */
-	private function enqueue_scripts() {
+	public function enqueue_scripts() {
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_frontend_js' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_frontend_css') );
 
