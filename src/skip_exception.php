@@ -5,4 +5,4 @@ namespace Skip;
 /**
  * Class Skip_Exception
  */
-class Exception extends \Exception { }
+class Skip_Exception extends \Exception { }

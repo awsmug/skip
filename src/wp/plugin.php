@@ -2,8 +2,6 @@
 
 namespace Skip\WP;
 
-use Skip\Singleton;
-
 /**
  * Class Plugin
  *
@@ -14,7 +12,6 @@ use Skip\Singleton;
  * @since 1.0.0
  */
 abstract class Plugin {
-	use Singleton;
 	use Enqueue_Scripts;
 
 	/**
@@ -36,11 +33,20 @@ abstract class Plugin {
 	private $asssets_path = 'assets/';
 
 	/**
+	 * Plugin constructor.
+	 *
+	 * @since 1.0.0
+	 */
+	public function __construct() {
+		$this->init();
+	}
+
+	/**
 	 * Initializing Plugin
 	 *
 	 * @since 1.0.0
 	 */
-	protected final function init() {
+	private final function init() {
 		$this->activation_hooks();
 
 		$this->init_enqueue_scripts();
