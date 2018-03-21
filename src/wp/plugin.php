@@ -47,9 +47,10 @@ abstract class Plugin {
 	 * @since 1.0.0
 	 */
 	private final function init() {
+		$this->setup();
 		$this->activation_hooks();
 
-		$this->init_enqueue_scripts();
+		$this->enqueue_scripts();
 
 		add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
 		add_action( 'plugins_loaded', array( $this, 'run' ) );
@@ -61,6 +62,13 @@ abstract class Plugin {
 	 * @since 1.0.0
 	 */
 	abstract public function run();
+
+	/**
+	 * Running Setup at the beginning
+	 *
+	 * @since 1.0.0
+	 */
+	abstract public function setup();
 
 	/**
 	 * Setting textdomain
