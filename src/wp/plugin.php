@@ -234,29 +234,5 @@ abstract class Plugin {
 				break;
 		}
 	}
-
-	/**
-	 * Hiding functions from IDE autocomplete
-	 *
-	 * @param string $method
-	 * @param array $arguments
-	 *
-	 * @since 1.0.0
-	 */
-	public static function __callStatic( $method, $arguments ) {
-		switch( $method ) {
-			case 'activate':
-				self::activate();
-				break;
-			case 'deactivate':
-				self::deactivate();
-				break;
-
-			case 'uninstall':
-				self::uninstall();
-				break;
-
-		}
-	}
 }
 
