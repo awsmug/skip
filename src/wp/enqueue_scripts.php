@@ -31,7 +31,7 @@ trait Enqueue_Scripts {
 	 *
 	 * @since 1.0.0
 	 */
-	private function init_enqueue_scripts() {
+	private function enqueue_scripts() {
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_frontend_js' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_frontend_css') );
 
@@ -133,9 +133,6 @@ trait Enqueue_Scripts {
 	 */
 	public function __call( $method, $arguments ) {
 		switch( $method ) {
-			case 'init_enqueue_scripts':
-				$this->init_enqueue_scripts();
-				break;
 			case 'enqueue_frontend_js':
 				$this->enqueue_frontend_js();
 				break;
