@@ -24,7 +24,7 @@ trait Admin_Notices {
 	 * @since 1.0.0
 	 */
 	protected function admin_notices() {
-		add_action( 'admin_notices', array( $this, 'show_admin_notices' ) );
+		add_action( 'admin_notices', array( $this, '_show_admin_notices' ) );
 	}
 
 	/**
@@ -54,21 +54,5 @@ trait Admin_Notices {
 		}
 
 		echo $html;
-	}
-
-	/**
-	 * Hiding methods from IDE
-	 *
-	 * @param string $method Method name
-	 * @param array $arguments Arguments to pass
-	 *
-	 * @since 1.0.0
-	 */
-	public function __call( $method, $arguments ) {
-		switch( $method ) {
-			case 'show_admin_notices':
-				$this->_show_admin_notices();
-				break;
-		}
 	}
 }
