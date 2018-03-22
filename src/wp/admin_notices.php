@@ -31,11 +31,11 @@ trait Admin_Notices {
 	 * Adding a notice to show
 	 *
 	 * @param string $message Message to show
-	 * @param string $type Notice type notice-error, notice-warning, notice-success or notice-info.
+	 * @param string $type Notice type 'error', 'warning', 'success' or 'info'.
 	 *
 	 * @since 1.0.0
 	 */
-	protected function add_notice( $message, $type = 'notice-info' ) {
+	protected function add_notice( $message, $type = 'info' ) {
 		$this->admin_notices[ $type ][] = $message;
 	}
 
@@ -46,7 +46,7 @@ trait Admin_Notices {
 	 */
 	private function show_admin_notices() {
 		foreach( $this->admin_notices AS $type => $messages ) {
-			$html = '<div class="notice ' . $type . ' is-dismissible">';
+			$html = '<div class="notice notice-' . $type . ' is-dismissible">';
 			foreach( $messages AS $message ) {
 				$html.= '<p>' . $message . '</p>';
 			}
