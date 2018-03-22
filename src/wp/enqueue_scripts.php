@@ -108,7 +108,7 @@ trait Enqueue_Scripts {
 	 * @since 1.0.0
 	 */
 	public final function add_css( $url, $where = 'frontend' ) {
-		$this->css_files[ $where ] = $url;
+		$this->css_files[ $where ][] = $url;
 	}
 
 	/**
@@ -120,7 +120,7 @@ trait Enqueue_Scripts {
 	 * @since 1.0.0
 	 */
 	public final function add_js( $url, $where = 'frontend' ) {
-		$this->js_files[ $where ] = $url;
+		$this->js_files[ $where ][] = $url;
 	}
 
 	/**
