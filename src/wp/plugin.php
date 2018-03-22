@@ -142,7 +142,7 @@ abstract class Plugin {
 	 *
 	 * @return string
 	 */
-	public final static function get_url( $path = '' ) {
+	public final static function get_url() {
 		$rc = new \ReflectionClass( get_called_class() );
 		return plugin_dir_url( $rc->getFileName() );
 	}
@@ -214,7 +214,7 @@ abstract class Plugin {
 			}
 		}
 
-		return $this->get_url( $urlpath );
+		return $this->get_url() . $urlpath;
 	}
 }
 
