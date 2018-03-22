@@ -93,21 +93,21 @@ abstract class Plugin {
 	 *
 	 * @since 1.0.0
 	 */
-	protected static function plugin_activate(){}
+	protected function plugin_activate(){}
 
 	/**
 	 * On Plugin deactivation
 	 *
 	 * @since 1.0.0
 	 */
-	protected static function plugin_deactivate(){}
+	protected function plugin_deactivate(){}
 
 	/**
 	 * On Plugin uninstalling
 	 *
 	 * @since 1.0.0
 	 */
-	protected static function plugin_uninstall(){}
+	protected function plugin_uninstall(){}
 
 	/**
 	 * Refistering all activation hooks
