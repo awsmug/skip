@@ -44,7 +44,7 @@ trait Enqueue_Scripts {
 	 *
 	 * @since 1.0.0
 	 */
-	private function enqueue_frontend_js () {
+	public function enqueue_frontend_js () {
 		if( ! array_key_exists( 'frontend', $this->js_files ) ) {
 			return;
 		}
@@ -59,7 +59,7 @@ trait Enqueue_Scripts {
 	 *
 	 * @since 1.0.0
 	 */
-	private function enqueue_frontend_css () {
+	public function enqueue_frontend_css () {
 		if( ! array_key_exists( 'frontend', $this->css_files ) ) {
 			return;
 		}
@@ -74,7 +74,7 @@ trait Enqueue_Scripts {
 	 *
 	 * @since 1.0.0
 	 */
-	private function enqueue_backend_js () {
+	public function enqueue_backend_js () {
 		if( ! array_key_exists( 'backend', $this->js_files ) ) {
 			return;
 		}
@@ -89,7 +89,7 @@ trait Enqueue_Scripts {
 	 *
 	 * @since 1.0.0
 	 */
-	private function enqueue_backend_css () {
+	public function enqueue_backend_css () {
 		if( ! array_key_exists( 'backend', $this->css_files ) ) {
 			return;
 		}
