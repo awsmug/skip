@@ -93,21 +93,21 @@ abstract class Plugin {
 	 *
 	 * @since 1.0.0
 	 */
-	protected static function plugin_activate(){}
+	public function plugin_activate(){}
 
 	/**
 	 * On Plugin deactivation
 	 *
 	 * @since 1.0.0
 	 */
-	protected static function plugin_deactivate(){}
+	public function plugin_deactivate(){}
 
 	/**
 	 * On Plugin uninstalling
 	 *
 	 * @since 1.0.0
 	 */
-	protected static function plugin_uninstall(){}
+	public function plugin_uninstall(){}
 
 	/**
 	 * Refistering all activation hooks
@@ -116,11 +116,10 @@ abstract class Plugin {
 	 */
 	private final function activation_hooks() {
 		$plugin_file = self::get_plugin_file();
-		$called_class = get_called_class();
 
-		register_activation_hook( $plugin_file, array( $called_class, 'plugin_activate' ) );
-		register_deactivation_hook( $plugin_file, array( $called_class, 'plugin_deactivate' ) );
-		register_uninstall_hook( $plugin_file, array( $called_class, 'plugin_uninstall' ) );
+		register_activation_hook( $plugin_file, array( $this, 'plugin_activate' ) );
+		register_deactivation_hook( $plugin_file, array( $this, 'plugin_deactivate' ) );
+		register_uninstall_hook( $plugin_file, array( $this, 'plugin_uninstall' ) );
 	}
 
 	/**
