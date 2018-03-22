@@ -45,9 +45,9 @@ trait Admin_Notices {
 	 * @since 1.0.0
 	 */
 	private function show_admin_notices() {
-		foreach( $this->admin_notices AS $type ) {
+		foreach( $this->admin_notices AS $type => $messages ) {
 			$html = '<div class="notice ' . $type . ' is-dismissible">';
-			foreach( $type AS $message ) {
+			foreach( $messages AS $message ) {
 				$html.= '<p>' . $message . '</p>';
 			}
 			$html.= '</div>';
