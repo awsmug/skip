@@ -129,13 +129,7 @@ abstract class Plugin {
 	 */
 	public final function _load_textdomain() {
 		if( empty( $this->textdomain ) ) {
-			$plugin_data = get_plugin_data( self::get_plugin_file() );
-
-			if( empty( $plugin_data['TextDomain'] ) ) {
-				return;
-			}
-
-			$this->textdomain = $plugin_data['TextDomain'] ;
+			return;
 		}
 
 		load_plugin_textdomain( $this->textdomain );
