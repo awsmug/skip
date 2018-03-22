@@ -48,11 +48,11 @@ abstract class Plugin {
 	 */
 	private final function init() {
 		$this->setup();
-		$this->activation_hooks();
+		$this->_activation_hooks();
 
 		$this->enqueue_scripts();
 
-		add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
+		add_action( 'plugins_loaded', array( $this, '_load_textdomain' ) );
 		add_action( 'plugins_loaded', array( $this, 'run' ) );
 	}
 
@@ -114,7 +114,7 @@ abstract class Plugin {
 	 *
 	 * @since 1.0.0
 	 */
-	private final function activation_hooks() {
+	private final function _activation_hooks() {
 		$plugin_file = self::get_plugin_file();
 
 		register_activation_hook( $plugin_file, array( $this, 'plugin_activate' ) );
@@ -127,7 +127,7 @@ abstract class Plugin {
 	 *
 	 * @since 1.0.0
 	 */
-	private final function load_textdomain() {
+	public final function _load_textdomain() {
 		if( empty( $this->textdomain ) ) {
 			$plugin_data = get_plugin_data( self::get_plugin_file() );
 
@@ -165,6 +165,10 @@ abstract class Plugin {
 		return plugin_dir_path( $rc->getFileName() );
 	}
 
+	/**
+	 * @return string
+	 * @throws \ReflectionException
+	 */
 	public final static function get_plugin_file() {
 		$rc = new \ReflectionClass( get_called_class() );
 		return $rc->getFileName();
@@ -217,22 +221,6 @@ abstract class Plugin {
 		}
 
 		return $this->get_url( $urlpath );
-	}
-
-	/**
-	 * Hiding functions from IDE autocomplete
-	 *
-	 * @param string $method
-	 * @param array $arguments
-	 *
-	 * @since 1.0.0
-	 */
-	public function __call( $method, $arguments ) {
-		switch( $method ) {
-			case 'loadtextdomain':
-				$this->load_textdomain();
-				break;
-		}
 	}
 }
 
