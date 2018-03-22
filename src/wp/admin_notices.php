@@ -24,7 +24,7 @@ trait Admin_Notices {
 	 * @since 1.0.0
 	 */
 	protected function admin_notices() {
-		add_action( 'admin_notices', array( $this, 'show_notices' ) );
+		add_action( 'admin_notices', array( $this, 'show_admin_notices' ) );
 	}
 
 	/**
