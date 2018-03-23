@@ -56,6 +56,14 @@ trait Admin_Notices {
 		echo $html;
 	}
 
+	/**
+	 * Hiding functions from IDE
+	 *
+	 * @param string $method Method name
+	 * @param array $args Arguments provided by method call
+	 *
+	 * @since 1.0.0
+	 */
 	public function __call( $method, $args ) {
 		switch ( $method ) {
 			case 'show_admin_notices':
