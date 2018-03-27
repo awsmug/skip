@@ -68,7 +68,7 @@ abstract class Plugin {
 	 *
 	 * @since 1.0.0
 	 */
-	abstract public function setup();
+	abstract protected function setup();
 
 	/**
 	 * Setting textdomain
