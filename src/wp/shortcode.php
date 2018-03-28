@@ -12,7 +12,6 @@ namespace Skip\WP;
  *
  * @since 1.0.0
  */
-
 abstract class Shortcode {
 	private $name;
 
