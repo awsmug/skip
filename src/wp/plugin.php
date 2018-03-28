@@ -1,7 +1,9 @@
 <?php
 
 namespace Skip\WP;
+
 use Skip\Singleton;
+use Skip\Skip_Exception;
 
 /**
  * Class Plugin
@@ -103,7 +105,9 @@ abstract class Plugin {
 	public function plugin_uninstall(){}
 
 	/**
-	 * Refistering all activation hooks
+	 * Registering all activation hooks
+	 *
+	 * @throws Skip_Exception
 	 *
 	 * @since 1.0.0
 	 */
@@ -134,9 +138,18 @@ abstract class Plugin {
 	 * @param string $path Path to subdirectory
 	 *
 	 * @return string
+	 *
+	 * @throws Skip_Exception
+	 *
+	 * @since 1.0.0
 	 */
 	public final static function get_url() {
-		$rc = new \ReflectionClass( get_called_class() );
+		try{
+			$rc = new \ReflectionClass( get_called_class() );
+		} catch ( \ReflectionException $e ) {
+			throw new Skip_Exception( $e->getMessage(), 0, $e );
+		}
+
 		return plugin_dir_url( $rc->getFileName() );
 	}
 
@@ -146,19 +159,39 @@ abstract class Plugin {
 	 * @param string $path Path to subdirectory
 	 *
 	 * @return string
+	 *
+	 * @throws Skip_Exception
+	 *
+	 * @since 1.0.0
 	 */
 	public final static function get_path() {
-		$rc = new \ReflectionClass( get_called_class() );
+		try{
+			$rc = new \ReflectionClass( get_called_class() );
+		} catch ( \ReflectionException $e ) {
+			throw new Skip_Exception( $e->getMessage(), 0, $e );
+		}
+
 		return plugin_dir_path( $rc->getFileName() );
 	}
 
 	/**
+	 * Getting plugin filename (with path)
+	 *
 	 * @return string
-	 * @throws \ReflectionException
+	 *
+	 * @throws Skip_Exception
+	 *
+	 * @since 1.0.0
 	 */
 	public final static function get_plugin_file() {
-		$rc = new \ReflectionClass( get_called_class() );
-		return $rc->getFileName();
+		try{
+			$rc = new \ReflectionClass( get_called_class() );
+			$filename = $rc->getFileName();
+		} catch ( \ReflectionException $e ) {
+			throw new Skip_Exception( $e->getMessage(), 0, $e );
+		}
+
+		return $filename;
 	}
 
 	/**
@@ -169,6 +202,10 @@ abstract class Plugin {
 	 * @param boolean $force whether to force to load the provided version of the file (not using .min conditionally)
 	 *
 	 * @return string
+	 *
+	 * @throws Skip_Exception
+	 *
+	 * @since 1.0.0
 	 */
 	public final function get_asset_url( $name, $mode = '', $force = false ) {
 		$urlpath = $this->assets_path;
