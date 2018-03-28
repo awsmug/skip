@@ -20,25 +20,25 @@ trait Singleton {
 	protected static $instance;
 
 	/**
-	 * Skip_Singleton
+	 * Skip Singleton
+	 *
+	 * @throws Skip_Exception
 	 *
 	 * @since 1.0.0
 	 */
 	final private function __construct() {
-		$this->init();
+		if( ! method_exists( get_called_class(), '_init' ) ) {
+			throw new Skip_Exception( 'Skip\Singleton using classes must have _init method' );
+		}
+		$this->_init();
 	}
-
-	/**
-	 * Put all class starting stuff here
-	 *
-	 * @since 1.0.0
-	 */
-	protected function init() {}
 
 	/**
 	 * Getting instance
 	 *
-	 * @return $instance
+	 * @return self $instance
+	 *
+	 * @throws Skip_Exception
 	 *
 	 * @since 1.0.0
 	 */

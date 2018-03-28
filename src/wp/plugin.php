@@ -32,14 +32,14 @@ abstract class Plugin {
 	 *
 	 * @since 1.0.0
 	 */
-	private $asssets_path = 'assets/';
+	private $assets_path = 'assets/';
 
 	/**
 	 * Initializing Plugin
 	 *
 	 * @since 1.0.0
 	 */
-	private final function init() {
+	private final function _init() {
 		$this->setup();
 		$this->_activation_hooks();
 
@@ -78,7 +78,7 @@ abstract class Plugin {
 	 * @param string $asset_path
 	 */
 	protected function set_asset_path( $asset_path ) {
-		$this->asssets_path = $asset_path;
+		$this->assets_path = $asset_path;
 	}
 
 	/**
@@ -171,7 +171,7 @@ abstract class Plugin {
 	 * @return string
 	 */
 	public final function get_asset_url( $name, $mode = '', $force = false ) {
-		$urlpath = $this->asssets_path;
+		$urlpath = $this->assets_path;
 
 		$can_min = true;
 
