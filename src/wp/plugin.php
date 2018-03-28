@@ -7,7 +7,7 @@ namespace Skip\WP;
  *
  * Create a class from this abstract class and put it into the main plugin file. It contains basic functionalities for plugin creation.
  *
- * @package Skip
+ * @package Skip\WP
  *
  * @since 1.0.0
  */
