@@ -55,7 +55,7 @@ abstract class Shortcode {
 	 */
 	protected function get_name() {
 		if( empty( $this->name ) ) {
-			$this->name = strtolower( get_called_class()) ;
+			$this->name = strtolower( get_called_class() );
 		}
 
 		return $this->name;
@@ -70,6 +70,20 @@ abstract class Shortcode {
 	 */
 	private function add_shortcode() {
 		add_shortcode( $this->get_name(), array( $this, 'execute' ) );
+	}
+
+	/**
+	 * Parse Attributes of shortcodes
+	 *
+	 * @param array $defaults Shortcode attributes
+	 * @param array $atts Attributes given by shortcode call
+	 *
+	 * @return array Combined and filtered attribute list.
+	 *
+	 * @since 1.0.0
+	 */
+	protected function parse_atts( $defaults, $atts ) {
+		return shortcode_atts( $defaults, $atts, $this->get_name() );
 	}
 
 	/**
