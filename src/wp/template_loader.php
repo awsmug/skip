@@ -11,7 +11,7 @@ use Skip\Skip_Exception;
  *
  * @since 1.0.0
  */
-abstract class Template_Loader{
+class Template_Loader{
 	/**
 	 * Passed arguments
 	 *
@@ -57,9 +57,19 @@ abstract class Template_Loader{
 	 *
 	 * @return mixed
 	 *
+	 * @throws Skip_Exception
+	 *
 	 * @since 1.0.0
 	 */
-	abstract function load();
+	private function load() {
+		$method_name = 'template_' . $this->template_name;
+
+		if( ! method_exists( $this, $method_name  ) ) {
+			throw new Skip_Exception( 'Missing template method ' . $method_name . ' in template loader class' );
+		}
+
+		$this->$method_name;
+	}
 
 	/**
 	 * Get arguments
