@@ -35,6 +35,8 @@ class Template_Loader{
 	 *
 	 * @throws Skip_Exception
 	 *
+	 * @return string HTML of template
+	 *
 	 * @since 1.0.0
 	 */
 	public function __construct() {
@@ -49,13 +51,13 @@ class Template_Loader{
 			throw new Skip_Exception( 'Empty value for parameter 1 is not allowed' );
 		}
 
-		$this->load();
+		return $this->load();
 	}
 
 	/**
 	 * Loads the Template
 	 *
-	 * @return mixed
+	 * @return string HTML of template
 	 *
 	 * @throws Skip_Exception
 	 *
@@ -68,7 +70,7 @@ class Template_Loader{
 			throw new Skip_Exception( 'Missing template method ' . $method_name . ' in template loader class' );
 		}
 
-		$this->$method_name;
+		return $this->$method_name;
 	}
 
 	/**
