@@ -12,16 +12,30 @@ use Skip\Skip_Exception;
  * @since 1.0.0
  */
 abstract class Template_Loader{
+	/**
+	 * Passed arguments
+	 *
+	 * @var array
+	 *
+	 * @since 1.0.0
+	 */
 	var $arguments = array();
 
+	/**
+	 * Template name
+	 *
+	 * @var string
+	 *
+	 * @since 1.0.0
+	 */
 	var $template_name;
 
 	/**
 	 * Template_Loader constructor.
 	 *
-	 * @throws \Exception
+	 * @throws Skip_Exception
 	 *
-	 *  @since 1.0.0
+	 * @since 1.0.0
 	 */
 	public function __construct() {
 		if( func_num_args() === 0 ) {
@@ -46,4 +60,27 @@ abstract class Template_Loader{
 	 * @since 1.0.0
 	 */
 	abstract function load();
+
+	/**
+	 * Get arguments
+	 *
+	 * @return array
+	 *
+	 * @since 1.0.0
+	 */
+	protected function get_arguments() {
+		return $this->arguments;
+	}
+
+
+	/**
+	 * Get template name
+	 *
+	 * @return string
+	 *
+	 * @since 1.0.0
+	 */
+	protected function get_template_name() {
+		return $this->template_name;
+	}
 }
