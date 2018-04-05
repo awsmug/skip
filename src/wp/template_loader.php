@@ -19,7 +19,7 @@ abstract class Template_Loader{
 	 *
 	 * @since 1.0.0
 	 */
-	var $arguments = array();
+	private $arguments = array();
 
 	/**
 	 * Template name
@@ -28,7 +28,7 @@ abstract class Template_Loader{
 	 *
 	 * @since 1.0.0
 	 */
-	var $template_name;
+	private $template_name;
 
 	/**
 	 * Template_Loader constructor.
