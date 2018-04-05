@@ -39,6 +39,8 @@ abstract class Template_Loader{
 	}
 
 	/**
+	 * Loads the Template
+	 *
 	 * @return mixed
 	 *
 	 * @since 1.0.0
