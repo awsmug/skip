@@ -39,8 +39,23 @@ class Template_Loader{
 	 */
 	private $template_name;
 
-
+	/**
+	 * Possible template directories
+	 *
+	 * @var array
+	 *
+	 * @since 1.0.0
+	 */
 	private $template_dirs = array();
+
+	/**
+	 * Template file (full path and filename)
+	 *
+	 * @var string
+	 *
+	 * @since 1.0.0
+	 */
+	private $template_file;
 
 	/**
 	 * Template_Loader constructor.
@@ -68,6 +83,7 @@ class Template_Loader{
 		);
 
 		$this->init();
+		$this->template_file = $this->locate_template();
 
 		return $this->load();
 	}
@@ -106,7 +122,11 @@ class Template_Loader{
 			throw new Skip_Exception( 'Missing template method ' . $method_name . ' in template loader class' );
 		}
 
-		return $this->$method_name;
+		ob_start();
+		$this->$method_name;
+		$html = ob_get_clean();
+
+		return $html;
 	}
 
 	/**
@@ -166,9 +186,22 @@ class Template_Loader{
 	}
 
 	/**
+	 * Get template file
+	 *
+	 * @return mixed
+	 *
+	 * @since 1.0.0
+	 */
+	protected function get_template_file() {
+		return $this->template_file;
+	}
+
+	/**
 	 * Locate template
 	 *
-	 * @return string Filename with full path
+	 * @return string|bool Filename with full path, false if not found
+	 *
+	 * @throws Skip_Exception
 	 *
 	 * @since 1.0.0
 	 */
@@ -182,5 +215,7 @@ class Template_Loader{
 				return $filename;
 			}
 		}
+
+		throw new Skip_Exception( 'Template file not found: ' . $template_filename );
 	}
 }
