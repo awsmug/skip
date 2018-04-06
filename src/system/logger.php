@@ -13,14 +13,20 @@ namespace Skip\System;
  */
 trait Logger {
 	/**
-	 * @var Logfile destination
+	 * Logfile destination
+	 *
+	 * @var string
+	 *
+	 * @since 1.0.0
 	 */
 	private $logfile;
 
 	/**
-	 * Logging function
+	 * Standard logging function
 	 *
-	 * @param $message
+	 * @param string $message
+	 *
+	 * @since 1.0.0
 	 */
 	private function log( $message ) {
 		if( ! empty( $this->logfile ) ) {
@@ -35,8 +41,8 @@ trait Logger {
 	/**
 	 * Logging an exception
 	 *
-	 * @param Exception $exception
-	 * @param int $depth
+	 * @param \Exception $exception Exception to log
+	 * @param int $depth Number previuos exceptions which should be logged
 	 *
 	 * @since 1.0.0
 	 */
@@ -63,7 +69,7 @@ trait Logger {
 	/**
 	 * Setting Logfile destination
 	 *
-	 * @param $filename
+	 * @param string $filename Additional logging filename
 	 *
 	 * @since 1.0.0
 	 */
