@@ -102,7 +102,7 @@ class Template_Loader{
 	 *
 	 * @since 1.0.0
 	 */
-	public function add_template_path( $path ) {
+	protected function add_template_path( $path ) {
 		$this->template_dirs[] = $path;
 	}
 
@@ -205,7 +205,7 @@ class Template_Loader{
 	 *
 	 * @since 1.0.0
 	 */
-	protected function locate_template() {
+	private function locate_template() {
 		$template_filename = $this->get_template_name() . 'php';
 
 		foreach( $this->template_dirs AS $dir ) {
@@ -217,5 +217,32 @@ class Template_Loader{
 		}
 
 		throw new Skip_Exception( 'Template file not found: ' . $template_filename );
+	}
+
+	/**
+	 * Loading Standard template in common way
+	 *
+	 * @since 1.0.0
+	 */
+	private function _standard_template() {
+		load_template( $this->get_template_file() );
+	}
+
+	/**
+	 * Catching functions
+	 *
+	 * @param string $method
+	 * @param array $arguments
+	 *
+	 * @throws Skip_Exception
+	 *
+	 * @since 1.0.0
+	 */
+	public function __call( $method, $arguments ) {
+		if( substr( $method, 0, 9 ) === 'template_' ) {
+			$this->_standard_template();
+		} else {
+			throw new Skip_Exception( 'Method name ' . $method . ' not found or allowed' );
+		}
 	}
 }
