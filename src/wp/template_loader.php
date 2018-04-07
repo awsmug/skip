@@ -220,6 +220,26 @@ class Template_Loader{
 	}
 
 	/**
+	 * Loading template file with vars
+	 *
+	 * @param string $template_file Template file
+	 * @param array $vars Variables to add
+	 *
+	 * @since 1.0.0
+	 */
+	public static function load_template( $template_file, $require_once = true, $vars = array() ) {
+		if ( ! empty( $vars ) ) {
+			extract( $vars, EXTR_SKIP );
+		}
+
+		if ( $template_file ) {
+			require_once $template_file;
+		} else {
+			require $template_file;
+		}
+	}
+
+	/**
 	 * Loading Standard template in common way
 	 *
 	 * @since 1.0.0
