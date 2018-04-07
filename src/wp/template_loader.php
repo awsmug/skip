@@ -242,10 +242,12 @@ class Template_Loader{
 	/**
 	 * Loading Standard template in common way
 	 *
+	 * @throws Skip_Exception
+	 *
 	 * @since 1.0.0
 	 */
 	private function _standard_template() {
-		load_template( $this->get_template_file() );
+		self::load_template( $this->get_template_file() );
 	}
 
 	/**
