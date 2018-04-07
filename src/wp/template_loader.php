@@ -62,8 +62,6 @@ class Template_Loader{
 	 *
 	 * @throws Skip_Exception
 	 *
-	 * @return string HTML of template
-	 *
 	 * @since 1.0.0
 	 */
 	public function __construct() {
@@ -84,8 +82,6 @@ class Template_Loader{
 
 		$this->init();
 		$this->template_file = $this->locate_template();
-
-		return $this->load();
 	}
 
 	/**
@@ -102,7 +98,7 @@ class Template_Loader{
 	 *
 	 * @since 1.0.0
 	 */
-	protected function add_template_path( $path ) {
+	public function add_template_path( $path ) {
 		$this->template_dirs[] = $path;
 	}
 
@@ -115,7 +111,7 @@ class Template_Loader{
 	 *
 	 * @since 1.0.0
 	 */
-	private function load() {
+	public function load() {
 		$method_name = 'template_' . $this->template_name;
 
 		if( ! method_exists( $this, $method_name  ) ) {
@@ -168,10 +164,14 @@ class Template_Loader{
 	 *
 	 * @param string $prefix
 	 *
+	 * @return $this
+	 *
 	 * @since 1.0.0
 	 */
-	protected function set_template_prefix( $prefix ) {
+	public function set_template_prefix( $prefix ) {
 		$this->template_prefix = $prefix;
+
+		return $this;
 	}
 
 	/**
@@ -205,7 +205,7 @@ class Template_Loader{
 	 *
 	 * @since 1.0.0
 	 */
-	private function locate_template() {
+	public function locate_template() {
 		$template_filename = $this->get_template_name() . 'php';
 
 		foreach( $this->template_dirs AS $dir ) {
@@ -241,8 +241,6 @@ class Template_Loader{
 
 	/**
 	 * Loading Standard template in common way
-	 *
-	 * @throws Skip_Exception
 	 *
 	 * @since 1.0.0
 	 */
