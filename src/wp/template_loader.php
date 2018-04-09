@@ -260,9 +260,9 @@ class Template_Loader{
 	 */
 	public function __call( $method, $arguments ) {
 		if( substr( $method, 0, 9 ) === 'template_' ) {
-			$this->_standard_template();
-		} else {
 			throw new Skip_Exception( 'Method name ' . $method . ' not found or allowed' );
 		}
+
+		$this->_standard_template();
 	}
 }
