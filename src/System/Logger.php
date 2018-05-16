@@ -22,6 +22,15 @@ trait Logger {
 	private $logfile;
 
 	/**
+	 * Logfile messages
+	 *
+	 * @var string
+	 *
+	 * @since 1.0.0
+	 */
+	private $log_msg;
+
+	/**
 	 * Standard logging function
 	 *
 	 * @param string $message
@@ -46,14 +55,14 @@ trait Logger {
 	 * @since 1.0.0
 	 */
 	private function log_exception( $exception ) {
-		$message = $exception->getMessage() . " in " . $exception->getFile() . PHP_EOL;
-		$this->log( $message );
+		$this->log_msg.= $exception->getMessage() . " in " . $exception->getFile() . PHP_EOL;
 
 		if( ! empty( $exception->getPrevious() ) ) {
-			$this->log_exception( $exception );
+			$this->log_exception( $exception->getPrevious() );
 		} else {
 			$trace = $exception->getTraceAsString() . PHP_EOL;
-			$this->log( $trace  );
+			$this->log( $this->log_msg . $trace  );
+			$this->log_msg = '';
 		}
 	}
 
