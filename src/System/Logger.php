@@ -42,9 +42,6 @@ trait Logger {
 	 * Logging an exception
 	 *
 	 * @param \Exception $exception Exception to log
-	 * @param int $current Current run
-	 *
-	 * @return bool|string
 	 *
 	 * @since 1.0.0
 	 */
