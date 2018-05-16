@@ -47,8 +47,8 @@ abstract class Plugin {
 
 		$this->enqueue_scripts();
 
-		add_action( 'plugins_loaded', array( $this, '_load_textdomain' ) );
-		add_action( 'plugins_loaded', array( $this, 'run' ) );
+		add_action( 'plugins_loaded', array( __CLASS__, '_load_textdomain' ) );
+		add_action( 'plugins_loaded', array( __CLASS__, 'run' ) );
 	}
 
 	/**
@@ -88,21 +88,21 @@ abstract class Plugin {
 	 *
 	 * @since 1.0.0
 	 */
-	public function plugin_activate(){}
+	public static function plugin_activate(){}
 
 	/**
 	 * On Plugin deactivation
 	 *
 	 * @since 1.0.0
 	 */
-	public function plugin_deactivate(){}
+	public static function plugin_deactivate(){}
 
 	/**
 	 * On Plugin uninstalling
 	 *
 	 * @since 1.0.0
 	 */
-	public function plugin_uninstall(){}
+	public static function plugin_uninstall(){}
 
 	/**
 	 * Registering all activation hooks
