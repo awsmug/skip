@@ -42,28 +42,22 @@ trait Logger {
 	 * Logging an exception
 	 *
 	 * @param \Exception $exception Exception to log
-	 * @param int $depth Number previuos exceptions which should be logged
+	 * @param int $current Current run
+	 *
+	 * @return bool|string
 	 *
 	 * @since 1.0.0
 	 */
-	private function log_exception( $exception, $depth = 0 ) {
-		$message = '';
-
-		$trace = $exception->getTraceAsString();
-
-		for( $act_depth = 0; $act_depth <= $depth; $act_depth++ ) {
-			if( $act_depth !== 0 ) {
-				$exception = $exception->getPrevious();
-			}
-
-			if( ! empty( $exception ) ) {
-				$message .= $exception->getMessage() . " in " . $exception->getFile() . PHP_EOL;
-			}
-		}
-
-		$message .= $trace;
-
+	private function log_exception( $exception ) {
+		$message = $exception->getMessage() . " in " . $exception->getFile() . PHP_EOL;
 		$this->log( $message );
+
+		if( ! empty( $exception->getPrevious() ) ) {
+			$this->log_exception( $exception, ++$current );
+		} else {
+			$trace = $exception->getTraceAsString() . PHP_EOL;
+			$this->log( $trace  );
+		}
 	}
 
 	/**
