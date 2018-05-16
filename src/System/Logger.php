@@ -50,7 +50,7 @@ trait Logger {
 		$this->log( $message );
 
 		if( ! empty( $exception->getPrevious() ) ) {
-			$this->log_exception( $exception, ++$current );
+			$this->log_exception( $exception );
 		} else {
 			$trace = $exception->getTraceAsString() . PHP_EOL;
 			$this->log( $trace  );
