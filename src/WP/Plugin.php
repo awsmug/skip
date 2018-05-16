@@ -47,8 +47,8 @@ abstract class Plugin {
 
 		$this->enqueue_scripts();
 
-		add_action( 'plugins_loaded', array( __CLASS__, '_load_textdomain' ) );
-		add_action( 'plugins_loaded', array( __CLASS__, 'run' ) );
+		add_action( 'plugins_loaded', array( $this, '_load_textdomain' ) );
+		add_action( 'plugins_loaded', array( $this, 'run' ) );
 	}
 
 	/**
@@ -114,9 +114,9 @@ abstract class Plugin {
 	private final function _activation_hooks() {
 		$plugin_file = self::get_plugin_file();
 
-		register_activation_hook( $plugin_file, array( $this, 'plugin_activate' ) );
-		register_deactivation_hook( $plugin_file, array( $this, 'plugin_deactivate' ) );
-		register_uninstall_hook( $plugin_file, array( $this, 'plugin_uninstall' ) );
+		register_activation_hook( $plugin_file, array( __CLASS__, 'plugin_activate' ) );
+		register_deactivation_hook( $plugin_file, array( __CLASS__, 'plugin_deactivate' ) );
+		register_uninstall_hook( $plugin_file, array( __CLASS__, 'plugin_uninstall' ) );
 	}
 
 	/**
